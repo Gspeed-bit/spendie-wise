@@ -238,7 +238,7 @@ body {
   }
 
   .toggle-switch {
-    @apply bg-gray-300 !important;
+    @apply bg-grey-300 !important;
   }
 }
 
@@ -262,7 +262,7 @@ body {
 .cl-formButtonPrimary:hover,
 .cl-formButtonPrimary:focus,
 .cl-formButtonPrimary:active {
-  background-color: #705CF7
+  background-color: #0d47a1
 }
 
 /* ========================================== REACT-DATEPICKER STYLES */

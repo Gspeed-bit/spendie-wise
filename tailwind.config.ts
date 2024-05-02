@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
@@ -20,37 +20,45 @@ const config = {
     extend: {
       colors: {
         primary: {
-          800: "#332100",
-          700: "#664200",
-          600: "#996300",
-          500: "#cc8400",
-          400: "#e69500",
-          300: "#ffa500",
-          200: "#ffae1a",
-          100: "#ffb733",
-          50: " #ffdb99",
-          DEFAULT: "#b37300",
+          "800": "#081C15",
+          "700": "#1B4332",
+          "600": "#2D6A4F",
+          "500": "#40916C",
+          "400": "#52B788",
+          "300": "#74C69D",
+          "200": "#95D5B2",
+          "100": "#B7E4C7",
+          "50": "#D8F3DC",
+          DEFAULT: "#40916C",
           foreground: "hsl(var(--primary-foreground))",
         },
-        coral: {
-          500: "#15BF59",
-          100: "#d8f0e5",
-        },
         bluey: {
-          500: "#3a5de9",
-          100: "#9daef4",
+          DEFAULT: "#0d47a1",
+          "900": "#030e20",
+          "800": "#051d40",
+          "700": "#082b60",
+          "600": "#0a3a80",
+          "500": "#0d47a1",
+          "400": "#1264df",
+          "300": "#4489f0",
+          "200": "#82b0f5",
+          "100": "#c1d8fa",
         },
-
         grey: {
-          600: "#4B3200", // Subdued - color name in figma
-          500: "#757575",
-          400: "#AFAFAF", // Disabled - color name in figma
-          100: "#dedede",
-
-          50: "#fbfbfb", // White Grey - color name in figma
+          DEFAULT: "#212529",
+          "900": "#070808",
+          "800": "#0e0f11",
+          "700": "#141719",
+          "600": "#1b1f22",
+          "500": "#212529",
+          "400": "#49525b",
+          "300": "#6f7d8b",
+          "200": "#9fa8b2",
+          "100": "#cfd4d8",
         },
         black: "#000000",
         white: "#FFFFFF",
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -105,4 +113,4 @@ const config = {
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
 
-export default config
+export default config;

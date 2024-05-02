@@ -2,6 +2,7 @@
 
 import Footer from "@/components/ui/shared/footer";
 import Header from "@/components/ui/shared/header";
+import SideMenu from "@/components/ui/shared/sideMenu";
 
 // this was created because we dont want the header and footer in all the pages so we created this layout seperately
 

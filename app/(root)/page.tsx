@@ -1,4 +1,5 @@
 import Hero from "@/components/ui/shared/hero";
+import SideMenu from "@/components/ui/shared/sideMenu";
 import Image from "next/image";
 
 export default function Home() {

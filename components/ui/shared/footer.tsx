@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-white dark:bg-gray-900">
       <div className="mx-auto max-w-screen px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-24">
@@ -25,7 +26,12 @@ const Footer = () => {
                   className="text-teal-700 transition hover:text-teal-700/75 dark:text-teal-500 dark:hover:text-teal-500/75"
                 >
                   <span className="sr-only">Facebook</span>
-                  <Image src="/logo.png" width={60} height={50} alt="Logo" />
+                  <Image
+                    src="/icons/facebook.svg"
+                    width={30}
+                    height={30}
+                    alt="Logo"
+                  />
                 </a>
               </li>
 
@@ -37,7 +43,12 @@ const Footer = () => {
                   className="text-teal-700 transition hover:text-teal-700/75 dark:text-teal-500 dark:hover:text-teal-500/75"
                 >
                   <span className="sr-only">Instagram</span>
-                  <Image src="/logo.png" width={60} height={50} alt="Logo" />
+                  <Image
+                    src="/icons/instagram.svg"
+                    width={30}
+                    height={30}
+                    alt="Logo"
+                  />
                 </a>
               </li>
 
@@ -49,7 +60,7 @@ const Footer = () => {
                   className="text-teal-700 transition hover:text-teal-700/75 dark:text-teal-500 dark:hover:text-teal-500/75"
                 >
                   <span className="sr-only">GitHub</span>
-                  <Image src="/logo.png" width={60} height={50} alt="Logo" />
+                  <Image src="/icons/x.svg" width={30} height={30} alt="Logo" />
                 </a>
               </li>
 
@@ -61,7 +72,12 @@ const Footer = () => {
                   className="text-teal-700 transition hover:text-teal-700/75 dark:text-teal-500 dark:hover:text-teal-500/75"
                 >
                   <span className="sr-only">Dribbble</span>
-                  <Image src="/logo.png" width={60} height={50} alt="Logo" />
+                  <Image
+                    src="/icons/youtube.svg"
+                    width={30}
+                    height={30}
+                    alt="Logo"
+                  />
                 </a>
               </li>
             </ul>
@@ -225,7 +241,7 @@ const Footer = () => {
                     </svg>
 
                     <span className="flex-1 text-gray-700 dark:text-gray-300">
-                      john@doe.com
+                      john@spendwise.de
                     </span>
                   </a>
                 </li>
@@ -278,7 +294,7 @@ const Footer = () => {
                   </svg>
 
                   <address className="-mt-0.5 flex-1 not-italic text-gray-700 dark:text-gray-300">
-                    213 Lane, London, United Kingdom
+                    Musterstraße 9000, Berlin, Germany
                   </address>
                 </li>
               </ul>
@@ -309,7 +325,7 @@ const Footer = () => {
             </p>
 
             <p className="mt-4 text-sm text-gray-500 sm:order-first sm:mt-0 dark:text-gray-400">
-              &copy; 2022 Spend Wise
+              &copy; {currentYear} Spend Wise
             </p>
           </div>
         </div>

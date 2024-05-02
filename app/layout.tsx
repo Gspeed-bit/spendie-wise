@@ -9,13 +9,11 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-
 export const metadata: Metadata = {
   title: "SpendWise",
   description:
     "An expense tracker app to help you manage your finances wisely.",
 };
-
 
 export default function RootLayout({
   children,

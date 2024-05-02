@@ -3,8 +3,8 @@ import Image from "next/image";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="bg-white dark:bg-gray-900">
-      <div className="mx-auto max-w-screen px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-24">
+    <footer className="bg-white mx-16  lg:mx-auto dark:bg-gray-900">
+      <div className="mx-20 px-4 pb-6 pt-10 sm:px-6 lg:px-8 lg:pt-24">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <div className="flex justify-center text-teal-600 sm:justify-start dark:text-teal-300">

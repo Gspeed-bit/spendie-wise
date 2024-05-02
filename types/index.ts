@@ -1,5 +1,5 @@
 type sideBarProps = {
-  image: string;
+  icon: React.ComponentType<any>
   url: string;
   text: string;
 };

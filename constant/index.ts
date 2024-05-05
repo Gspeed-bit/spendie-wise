@@ -1,26 +1,30 @@
 import { LiaPiggyBankSolid } from "react-icons/lia";
 import { GiUpgrade, GiTakeMyMoney } from "react-icons/gi";
 import { TbLayoutGridAdd } from "react-icons/tb";
+import { useRouter } from "next/navigation";
+
 
 export const sideBar: sideBarProps[] = [
   {
     icon: TbLayoutGridAdd,
-    url: "https://github.com/Gspeed-bit",
+    url: "/dashboard",
     text: "Dashboard",
   },
   {
     icon: LiaPiggyBankSolid,
-    url: "https://www.linkedin.com/in/ayodeji-daniel-adeyeye-6a86a91a9/",
+    url: "/dashboard/budgets",
     text: "Budgets",
   },
   {
     icon: GiTakeMyMoney,
-    url: "https://www.linkedin.com/in/ayodeji-daniel-adeyeye-6a86a91a9/",
+    url: "/dashboard/expenses",
     text: "Expenses",
   },
   {
     icon: GiUpgrade,
-    url: "https://www.linkedin.com/in/ayodeji-daniel-adeyeye-6a86a91a9/",
+    url: "/dashboard/upgrade",
     text: "Upgrade",
   },
 ];
+
+

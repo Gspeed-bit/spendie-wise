@@ -1,7 +1,10 @@
+import BudgetsList from "./_components/BudgetsList";
+
 const page = () => {
   return (
-    <div className="  min-h-screen mx-auto w-full flex-center">
-      <p className=" h3-bold">Budgets</p>
+    <div className="mx-4 p-5">
+      <p className=" h3-bold">My Budgets</p>
+      <BudgetsList/>
     </div>
   );
 };

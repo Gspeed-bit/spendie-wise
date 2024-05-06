@@ -21,25 +21,24 @@ import { db } from "@/utils/dbConfig";
 import { toast } from "sonner";
 import { formattedEventDate } from "@/constant";
 
-const CreateBudget = () => {
+const CreateBudget = ({refreshData}: {refreshData: () => void}) => {
   const [pickEmoji, setPickEmoji] = useState("🤓");
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
-const [ eventCreated, setEventCreated] = useState(false)
+  const [eventCreated, setEventCreated] = useState(false);
   const { user } = useUser();
 
+  useEffect(() => {
+    if (eventCreated) {
+      toast("New Budget has been created", {
+        description: formattedEventDate,
+      });
+      refreshData();// used to refresh the database after creating the budget
+    }
+  }, [eventCreated]);
 
-
-   useEffect(() => {
-     if (eventCreated) {
-       toast("New Budget has been created", {
-         description: formattedEventDate,
-       });
-     }
-   }, [eventCreated]);
-  
   const onCreateBudget = async (budget: budgetTypesProps) => {
     setIsLoading(true);
     const result = await db
@@ -57,10 +56,8 @@ const [ eventCreated, setEventCreated] = useState(false)
     setTimeout(() => {
       setEventCreated(false);
     }, 2000);
-
   };
 
- 
   return (
     <div className="flex p-7 border-2 border-dashed border-grey-100 rounded-xl bg-primary-50 items-center justify-center cursor-pointer ">
       <Dialog>

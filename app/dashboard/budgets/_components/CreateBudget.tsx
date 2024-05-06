@@ -62,15 +62,15 @@ const [ eventCreated, setEventCreated] = useState(false)
 
  
   return (
-    <div className="flex m-10 p-16 max-w-2xl px-5 md:px-20 lg:px-20 border-2 border-dashed border-grey-100 rounded-xl bg-primary-50 items-center justify-center cursor-pointer min-w-xl  ">
+    <div className="flex p-7 border-2 border-dashed border-grey-100 rounded-xl bg-primary-50 items-center justify-center cursor-pointer ">
       <Dialog>
         <DialogTrigger>
-          <div className="flex-col space-y-4">
+          <div className="flex-col space-y-3">
             <div className="flex-center">
               <CirclePlus />
             </div>
             <p className="text-grey-800 p-semibold-14 md:p-semibold-16 lg:p-semibold-18">
-              Create Budget
+              Create New Budget
             </p>
           </div>
         </DialogTrigger>

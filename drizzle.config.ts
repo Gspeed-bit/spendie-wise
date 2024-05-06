@@ -6,6 +6,6 @@ export default {
   schema: "./db/schema.ts",
   driver: "pg",
   dbCredentials: {
-    connectionString:  process.env.NEXT_PUBLIC_POSTGRES_URL!,
+    connectionString: (process.env.NEXT_PUBLIC_DATABASE_URL!)
   },
 } satisfies Config;

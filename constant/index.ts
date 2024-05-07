@@ -46,4 +46,3 @@ export const formattedEventDate = eventDate.toLocaleString("de-DE", {
 });
 
 
-

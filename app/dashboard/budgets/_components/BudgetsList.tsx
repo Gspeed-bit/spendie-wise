@@ -36,7 +36,6 @@ useEffect(() => {
       .orderBy(desc(Budgets.id))//used to arrange the budgets
     //Updates the budgetList state variable with the fetched data.
     setbudgetList(result);
-    console.log(result);
   }
 
 
@@ -44,7 +43,7 @@ useEffect(() => {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-10 m-2">
         <CreateBudget refreshData={()=>getBudgetList()} />
-        {budgetList.length>0 ?budgetList.map((budget,index)=>(
+        {budgetList.length>0?budgetList.map((budget,index)=>(
           <div key={index} className="bg-white shadow-md p-4 rounded-md">
             <BudgetItem budget={budget}/>
           </div>

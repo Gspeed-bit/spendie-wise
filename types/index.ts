@@ -23,4 +23,7 @@ type BudgetListItem = {
 }
 
 
+type BudgetItemProps = {
+  budget: BudgetListItem; 
+};
 

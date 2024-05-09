@@ -30,9 +30,9 @@ interface BudgetItemProps {
 
 const ExpenseDashboard = ({
   params,
-  refreshData,
+ 
 }: {
-  refreshData: () => void;
+ 
   params: any;
 }) => {
   const [budgetInfo, setBudgetInfo] = useState<BudgetListItem | null>(null); // Initialize with null or single BudgetListItem

@@ -2,7 +2,7 @@ import { LiaPiggyBankSolid } from "react-icons/lia";
 import { GiUpgrade, GiTakeMyMoney } from "react-icons/gi";
 import { TbLayoutGridAdd } from "react-icons/tb";
 import { db } from "@/utils/dbConfig";
-import { Budgets } from "@/db/schema";
+import { Budgets, Expenses } from "@/db/schema";
 import { useUser } from "@clerk/nextjs";
 
 export const sideBar: sideBarProps[] = [

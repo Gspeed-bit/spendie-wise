@@ -84,7 +84,7 @@ const ExpenseDashboard = ({
       console.error("Error fetching budget info:", error);
     }
   };
-
+  
   const getExpensesListInfo = async () => {
     try {
       const result = await db

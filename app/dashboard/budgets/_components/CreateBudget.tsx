@@ -21,7 +21,7 @@ import { db } from "@/utils/dbConfig";
 import { toast } from "sonner";
 import { formattedEventDate } from "@/constant";
 
-const CreateBudget = ({refreshData}: {refreshData: () => void}) => {
+const CreateBudget = ({ refreshData }: { refreshData: () => void }) => {
   const [pickEmoji, setPickEmoji] = useState("🤓");
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +35,7 @@ const CreateBudget = ({refreshData}: {refreshData: () => void}) => {
       toast("New Budget has been created", {
         description: formattedEventDate,
       });
-      refreshData();// used to refresh the database after creating the budget
+      refreshData(); // used to refresh the database after creating the budget
     }
   }, [eventCreated]);
 

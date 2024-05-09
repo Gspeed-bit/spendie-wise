@@ -14,7 +14,7 @@ import Image from "next/image";
 interface ExpensesListProps {
   expensesListInfo: ExpensesListItem[];
   onDeleteExpense: (expenseId: number) => void;
-  
+
 }
 
 const ExpenseListTable = ({
@@ -22,6 +22,8 @@ const ExpenseListTable = ({
 
   onDeleteExpense,
 }: ExpensesListProps) => {
+
+
   const { user, isSignedIn } = useUser();
 
   // Calculate total amount
@@ -77,6 +79,7 @@ const ExpenseListTable = ({
           </TableRow>
         </TableFooter>
       </Table>
+      
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { db } from "@/utils/dbConfig";
 import { Budgets, Expenses } from "@/db/schema";
 import { useUser } from "@clerk/nextjs";
 import BudgetItem from "../../budgets/_components/BudgetItem";
-
+import AddExpenses from "./_components/AddExpenses";
 
 interface BudgetItemProps {
   budget: BudgetListItem; // Make sure BudgetItem component expects BudgetListItem as the type of the budget prop
@@ -17,9 +17,10 @@ const ExpenseDashboard = ({ params }: { params: any }) => {
 
   const { user } = useUser();
   useEffect(() => {
-    getBudgetInfo();
-    user && getBudgetInfo();
-  }, [params]);
+    if (user) {
+      getBudgetInfo();
+    }
+  }, [user,params]);
 
   const getBudgetInfo = async () => {
     try {
@@ -49,34 +50,42 @@ const ExpenseDashboard = ({ params }: { params: any }) => {
   };
 
   return (
-    <div className="p-10">
+    <div className="p-5 ">
       <p className=" h3-bold ">Expenses</p>
-      <div className="max-w-5xl bg-white shadow-md p-4 rounded-md pt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-10 m-2">
-        {budgetInfo ? (
-          <BudgetItem budget={budgetInfo} />
-        ) : (
-          <div className="bg-white shadow-md p-4 rounded-md animate-pulse">
-            <div className="flex-between px-3 py-3">
-              <div className="flex-center gap-3  ">
-                <h2 className="bg-bluey-100 rounded-full p-2 px-3 w-15 h-15"></h2>
-                <div className="flex-col p-medium-14 ">
-                  <h2 className="p-semibold-20"></h2>
-                  <h2></h2>
+
+      <div className=" pt-5 grid grid-cols-1 md:grid-cols-2 gap-2 mt-10 w-full  ">
+        <div>
+          {budgetInfo ? (
+            <p className="border rounded-xl bg-white shadow-md p-4 pb-8 px-3">
+              <BudgetItem budget={budgetInfo} />
+            </p>
+          ) : (
+            <div className="bg-white shadow-md p-4 rounded-md animate-pulse">
+              <div className="flex-between px-3 py-3">
+                <div className="flex-center gap-3 ">
+                  <h2 className="bg-bluey-100 rounded-full p-2 px-3 w-15 h-15"></h2>
+                  <div className="flex-col p-medium-14 ">
+                    <h2 className="p-semibold-20"></h2>
+                    <h2></h2>
+                  </div>
+                </div>
+                <h2 className="p-semibold-20 text-primary-600"></h2>
+              </div>
+              <div className="mt-2">
+                <div className="px-3 flex-between text-grey-200 text-xs pb-2 ">
+                  <h2 className=""></h2>
+                  <h2 className=" "></h2>
+                </div>
+                <div className=" bg-grey-100 h-2 rounded-full">
+                  <div className="bg-primary w-[50%] h-2 rounded-full"></div>
                 </div>
               </div>
-              <h2 className="p-semibold-20 text-primary-600"></h2>
             </div>
-            <div className="mt-2">
-              <div className="px-3 flex-between text-grey-200 text-xs pb-2 ">
-                <h2 className=""></h2>
-                <h2 className=" "></h2>
-              </div>
-              <div className=" bg-grey-100 h-2 rounded-full">
-                <div className="bg-primary w-[50%] h-2 rounded-full"></div>
-              </div>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
+        <div className="">
+          <AddExpenses />
+        </div>
       </div>
     </div>
   );

@@ -27,3 +27,22 @@ type BudgetItemProps = {
   budget: BudgetListItem; 
 };
 
+
+
+type expensesTypesProps = {
+  name: string;
+  amount: string;
+};
+
+
+
+type ExpensesListItem = {
+  id: number;
+  name: string;
+  amount: string | number;
+  createdAt: string;
+};
+
+type ExpensesItemProps = {
+  expenses: ExpensesListItem;
+};

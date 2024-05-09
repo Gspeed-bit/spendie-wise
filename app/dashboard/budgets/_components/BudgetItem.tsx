@@ -1,7 +1,12 @@
-   import Link from 'next/link';
-
+import Link from "next/link";
 
 const BudgetItem = ({ budget }: BudgetItemProps) => {
+  const calculateProgressBarPercentage = () => {
+    if (Number(budget.amount) === 0) return 0; // Avoid division by zero
+    const percentage = (budget.totalSpend / Number(budget.amount)) * 100;
+    return percentage;
+  };
+
   return (
     <Link href={`/dashboard/expenses/${budget.id}`}>
       <div className="flex-between px-1 py-5 ">
@@ -28,11 +33,14 @@ const BudgetItem = ({ budget }: BudgetItemProps) => {
             Number(budget.amount) - Number(budget.totalSpend)
           } Remaining`}</h2>
         </div>
+
+        {/* progress bar percentage */}
         <div className="bg-grey-100 h-2 rounded-full">
-          <div className="bg-primary w-[30%] h-2 rounded-full"></div>
-        </div>
+          <div className={`h-2 rounded-full ${calculateProgressBarPercentage() >= 90 ? 'bg-red-500' : 'bg-primary'}`} style={{ width: `${calculateProgressBarPercentage()}%` }}></div>
+      </div>
       </div>
     </Link>
   );
 };
+
 export default BudgetItem;

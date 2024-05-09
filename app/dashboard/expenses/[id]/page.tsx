@@ -44,6 +44,7 @@ const ExpenseDashboard = ({ params }: { params: any }) => {
         .groupBy(Budgets.id);
       console.log(result);
       setBudgetInfo(result[0]);
+   // used to refresh the database after creating the budget
     } catch (error) {
       console.error("Error fetching budget info:", error);
     }
@@ -84,7 +85,8 @@ const ExpenseDashboard = ({ params }: { params: any }) => {
           )}
         </div>
         <div className="">
-          <AddExpenses />
+          <AddExpenses budgetId={params.id} 
+          refreshData={() => getBudgetInfo()} />
         </div>
       </div>
     </div>

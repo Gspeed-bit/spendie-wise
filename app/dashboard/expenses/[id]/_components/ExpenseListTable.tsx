@@ -70,7 +70,7 @@ const ExpenseListTable = ({
             <TableCell colSpan={5} className="p-medium-20">
               Total
             </TableCell>
-            <TableCell className=" p-medium-16">
+            <TableCell className=" p-medium-14">
               {`\u20AC${totalAmount}`}
             </TableCell>
           </TableRow>

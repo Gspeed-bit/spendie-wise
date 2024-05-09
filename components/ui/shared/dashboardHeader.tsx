@@ -5,7 +5,7 @@ import { Button } from "../button";
 export const DashboardHeader = () => {
     const { user, isSignedIn } = useUser();
   return (
-    <div className="p-4 sticky top-0 flex-between shadow-sm">
+    <div className="p-4 sticky top-0 bg-white flex-between shadow-sm">
       <h1>search bar</h1>
       <div>
         {isSignedIn ? (

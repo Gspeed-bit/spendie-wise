@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import { desc, eq, getTableColumns, sql } from "drizzle-orm";
-import CreateBudget from "./CreateBudget"
+import CreateBudget from "./CreateBudget";
 import { Budgets, Expenses } from "@/db/schema";
 import { db } from "@/utils/dbConfig";
 import { useUser } from "@clerk/nextjs";
@@ -9,17 +9,15 @@ import { useEffect, useState } from "react";
 import BudgetItem from "./BudgetItem";
 
 const BudgetList = () => {
+  const [budgetList, setbudgetList] = useState<BudgetListItem[]>([]);
 
-const [budgetList, setbudgetList] = useState<BudgetListItem[]>([]);
-
-const {user}= useUser();
-useEffect(() => {
-  user  && getBudgetList();
-}, [user]);
-
+  const { user } = useUser();
+  useEffect(() => {
+    user && getBudgetList();
+  }, [user]);
 
   // use to get budget list
-  const getBudgetList = async()=>{
+  const getBudgetList = async () => {
     const result = await db
       .select({
         ...getTableColumns(Budgets),
@@ -33,19 +31,16 @@ useEffect(() => {
         eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress || "")
       )
       .groupBy(Budgets.id)
-      .orderBy(desc(Budgets.id))//used to arrange the budgets
-//Convert the "amount" property to number 
-const budgets = result.map((budget)=>({
-  ...budget,
-  amount: Number(budget.amount)
-
-}));
-
+      .orderBy(desc(Budgets.id)); //used to arrange the budgets
+    //Convert the "amount" property to number
+    const budgets = result.map((budget) => ({
+      ...budget,
+      amount: Number(budget.amount),
+    }));
 
     //Updates the budgetList state variable with the fetched data.
     setbudgetList(budgets);
-  }
-
+  };
 
   return (
     <div>
@@ -53,10 +48,7 @@ const budgets = result.map((budget)=>({
         <CreateBudget refreshData={() => getBudgetList()} />
         {budgetList.length > 0
           ? budgetList.map((budget, index) => (
-              <div
-                key={index}
-                className="bg-white shadow-md p-4 rounded-md "
-              >
+              <div key={index} className="bg-white shadow-md p-4 rounded-md ">
                 <BudgetItem budget={budget} />
               </div>
             ))
@@ -88,5 +80,5 @@ const budgets = result.map((budget)=>({
       </div>
     </div>
   );
-}
+};
 export default BudgetList;

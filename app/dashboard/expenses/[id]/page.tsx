@@ -12,7 +12,18 @@ import { toast } from "sonner";
 import { formattedEventDate } from "@/constant";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useRouter } from "next/navigation";
 interface BudgetItemProps {
   budget: BudgetListItem; // Make sure BudgetItem component expects BudgetListItem as the type of the budget prop
 }
@@ -29,6 +40,7 @@ const ExpenseDashboard = ({
     []
   );
   const { user } = useUser();
+  const router = useRouter();
   useEffect(() => {
     if (user) {
       getBudgetInfo();
@@ -117,26 +129,67 @@ const ExpenseDashboard = ({
     }
   };
 
+  const handleDeleteBudget = async () => {
+    const result = await db
+      .delete(Expenses)
+      .where(eq(Expenses.budgetId, params.id))
+      .returning();
+
+    if (result) {
+      const response = await db
+        .delete(Budgets)
+        .where(eq(Budgets.id, params.id))
+        .returning();
+    }
+
+    toast("Oopss Budget has been deleted", {
+      description: formattedEventDate,
+    });
+    router.push("/dashboard/budgets");
+  };
+
   return (
     <div className="p-5 ">
-      <div className="flex-between">
-        <p className=" h3-bold ">Expenses</p>
-
-        <Button variant="destructive">
-          <Image
-            // onClick={() => ()}
-            src={"/icons/trash-2.svg"}
-            alt={"logo"}
-            width={20}
-            height={20}
-            className="cursor-pointer"
-          />
-        </Button>
-      </div>
+      <p className=" h3-bold ">Expenses</p>
       <div className=" pt-5 grid grid-cols-1 md:grid-cols-2 gap-2 mt-10 w-full  ">
         <div>
           {budgetInfo ? (
             <p className="border rounded-xl bg-white shadow-md p-4 pb-8 px-3">
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <div className="flex items-center justify-end">
+                    <Button
+                      variant="destructive"
+                      className="flex items-end justify-end p-3 rounded-full cursor-pointer"
+                    >
+                      <Image
+                        src={"/icons/trash-white.svg"}
+                        alt={"logo"}
+                        width={16}
+                        height={10}
+                      />
+                    </Button>
+                  </div>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete
+                      this budget and remove the data from our servers.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={handleDeleteBudget}>
+                      Continue
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+
               <BudgetItem budget={budgetInfo} />
             </p>
           ) : (

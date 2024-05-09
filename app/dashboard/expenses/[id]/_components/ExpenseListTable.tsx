@@ -8,18 +8,27 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
 import { useUser } from "@clerk/clerk-react";
 import Image from "next/image";
 interface ExpensesListProps {
   expensesListInfo: ExpensesListItem[];
-  totalSpend: number;
+  onDeleteExpense: (expenseId: number) => void;
 }
 
 const ExpenseListTable = ({
   expensesListInfo,
-  totalSpend,
+
+  onDeleteExpense,
 }: ExpensesListProps) => {
   const { user, isSignedIn } = useUser();
+
+  // Calculate total amount
+  const totalAmount = expensesListInfo.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.amount,
+    0
+  );
+
   return (
     <div className="mt-10 ">
       <h2 className="text-center h3-bold ">A list of your Expenses.</h2>
@@ -45,11 +54,12 @@ const ExpenseListTable = ({
               <TableCell>{List.createdAt}</TableCell>
               <TableCell className="">
                 <Image
+                  onClick={() => onDeleteExpense(List.id)}
                   src={"/icons/trash.svg"}
                   alt={"logo"}
                   width={20}
                   height={20}
-                  className=""
+                  className="cursor-pointer"
                 />
               </TableCell>
             </TableRow>
@@ -60,8 +70,8 @@ const ExpenseListTable = ({
             <TableCell colSpan={5} className="p-medium-20">
               Total
             </TableCell>
-            <TableCell className="text-right p-medium-20">
-              {`\u20AC ${totalSpend !== null ? totalSpend : 0}`}
+            <TableCell className=" p-medium-16">
+              {`\u20AC${totalAmount}`}
             </TableCell>
           </TableRow>
         </TableFooter>

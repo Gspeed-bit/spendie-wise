@@ -34,8 +34,16 @@ useEffect(() => {
       )
       .groupBy(Budgets.id)
       .orderBy(desc(Budgets.id))//used to arrange the budgets
+//Convert the "amount" property to number 
+const budgets = result.map((budget)=>({
+  ...budget,
+  amount: Number(budget.amount)
+
+}));
+
+
     //Updates the budgetList state variable with the fetched data.
-    setbudgetList(result);
+    setbudgetList(budgets);
   }
 
 

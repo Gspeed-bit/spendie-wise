@@ -26,7 +26,7 @@ const CreateBudget = ({refreshData}: {refreshData: () => void}) => {
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState<number>(0);
   const [eventCreated, setEventCreated] = useState(false);
   const { user } = useUser();
 
@@ -45,7 +45,7 @@ const CreateBudget = ({refreshData}: {refreshData: () => void}) => {
       .insert(Budgets)
       .values({
         name: budget.name,
-        amount: budget.amount,
+        amount: budget.amount.toString(),
         pickEmoji: budget.pickEmoji,
         createdBy: user?.primaryEmailAddress?.emailAddress || "",
       })
@@ -108,7 +108,7 @@ const CreateBudget = ({refreshData}: {refreshData: () => void}) => {
                     type="number"
                     placeholder={`e.g. \u20AC 1000`}
                     className="placeholder:text-bluey-100 p-regular-12"
-                    onChange={(e) => setAmount(e.target.value)}
+                    onChange={(e) => setAmount(parseFloat(e.target.value))}
                   />
                 </div>
               </div>

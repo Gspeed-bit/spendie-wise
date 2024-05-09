@@ -8,12 +8,20 @@ import { useUser } from "@clerk/nextjs";
 import BudgetItem from "../../budgets/_components/BudgetItem";
 import AddExpenses from "./_components/AddExpenses";
 import ExpenseListTable from "./_components/ExpenseListTable";
+import { toast } from "sonner";
+import { formattedEventDate } from "@/constant";
 
 interface BudgetItemProps {
   budget: BudgetListItem; // Make sure BudgetItem component expects BudgetListItem as the type of the budget prop
 }
 
-const ExpenseDashboard = ({ params }: { params: any }) => {
+const ExpenseDashboard = ({
+  params,
+  refreshData,
+}: {
+  refreshData: () => void;
+  params: any;
+}) => {
   const [budgetInfo, setBudgetInfo] = useState<BudgetListItem | null>(null); // Initialize with null or single BudgetListItem
   const [expensesListInfo, setExpensesListInfo] = useState<ExpensesListItem[]>(
     []
@@ -46,7 +54,14 @@ const ExpenseDashboard = ({ params }: { params: any }) => {
           )
         )
         .groupBy(Budgets.id);
-      setBudgetInfo(result[0]);
+
+      // Convert amount from string to number
+      const expensesList = result.map((expense) => ({
+        ...expense,
+        amount: parseFloat(expense.amount),
+      }));
+
+      setBudgetInfo(expensesList[0]);
       getExpensesListInfo();
 
       // used to refresh the database after creating the budget
@@ -62,12 +77,44 @@ const ExpenseDashboard = ({ params }: { params: any }) => {
         .from(Expenses)
         .where(eq(Expenses.budgetId, params.id))
         .orderBy(desc(Expenses.id));
-      setExpensesListInfo(result);
+
+      // Convert amount from string to number
+      const expensesList = result.map((expense) => ({
+        ...expense,
+        amount: parseFloat(expense.amount),
+      }));
+
+      setExpensesListInfo(expensesList);
       console.log(result);
     } catch (error) {
       console.error("Error fetching expenses list:", error);
     }
   };
+
+  const handleDeleteExpense = async (expenseId: number) => {
+    try {
+      // Delete expense from database
+      const response = await db
+        .delete(Expenses)
+        .where(eq(Expenses.id, expenseId))
+        .returning();
+
+      if (response) {
+        toast("Expenses has been deleted", {
+          description: formattedEventDate,
+        });
+        // Refresh budget information
+        getBudgetInfo();
+      }
+      // Update expensesList state by filtering out the deleted expense
+      setExpensesListInfo((prevExpensesList) =>
+        prevExpensesList.filter((expense) => expense.id !== expenseId)
+      );
+    } catch (error) {
+      console.error("Error deleting expense:", error);
+    }
+  };
+
   return (
     <div className="p-5 ">
       <p className=" h3-bold ">Expenses</p>
@@ -111,8 +158,9 @@ const ExpenseDashboard = ({ params }: { params: any }) => {
       </div>
       <div>
         <ExpenseListTable
+          onDeleteExpense={handleDeleteExpense}
           expensesListInfo={expensesListInfo}
-          totalSpend={budgetInfo?budgetInfo.totalSpend:0}
+        
         />
       </div>
     </div>

@@ -8,7 +8,7 @@ type sideBarProps = {
 
 type budgetTypesProps = {
   name: string;
-  amount: string;
+  amount: number;
   pickEmoji: string;
 };
 
@@ -17,7 +17,7 @@ type BudgetListItem = {
   totalItem: number;
   id: number;
   name: string;
-  amount: string;
+  amount: number;
   pickEmoji: string | null;
   createdBy: string;
 }
@@ -31,7 +31,7 @@ type BudgetItemProps = {
 
 type expensesTypesProps = {
   name: string;
-  amount: string;
+  amount: number;
 };
 
 
@@ -39,7 +39,7 @@ type expensesTypesProps = {
 type ExpensesListItem = {
   id: number;
   name: string;
-  amount: string | number;
+  amount: number;
   createdAt: string;
   budgetId: number | null;
 

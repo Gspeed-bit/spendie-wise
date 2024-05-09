@@ -52,7 +52,9 @@ const AddExpenses = ({
 
   return (
     <div className="border rounded-xl shadow-sm p-4 w-full space-y-3 ">
+      
       <h1 className="p-semibold-20">Add Expenses</h1>
+
       <div className="space-y-4 mt-2 text-primary">
         <h2 className="p-semibold-14">Budget Name</h2>
         <Input

@@ -10,6 +10,8 @@ import AddExpenses from "./_components/AddExpenses";
 import ExpenseListTable from "./_components/ExpenseListTable";
 import { toast } from "sonner";
 import { formattedEventDate } from "@/constant";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface BudgetItemProps {
   budget: BudgetListItem; // Make sure BudgetItem component expects BudgetListItem as the type of the budget prop
@@ -117,8 +119,20 @@ const ExpenseDashboard = ({
 
   return (
     <div className="p-5 ">
-      <p className=" h3-bold ">Expenses</p>
+      <div className="flex-between">
+        <p className=" h3-bold ">Expenses</p>
 
+        <Button variant="destructive">
+          <Image
+            // onClick={() => ()}
+            src={"/icons/trash-2.svg"}
+            alt={"logo"}
+            width={20}
+            height={20}
+            className="cursor-pointer"
+          />
+        </Button>
+      </div>
       <div className=" pt-5 grid grid-cols-1 md:grid-cols-2 gap-2 mt-10 w-full  ">
         <div>
           {budgetInfo ? (
@@ -160,7 +174,6 @@ const ExpenseDashboard = ({
         <ExpenseListTable
           onDeleteExpense={handleDeleteExpense}
           expensesListInfo={expensesListInfo}
-        
         />
       </div>
     </div>

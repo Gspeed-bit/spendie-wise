@@ -14,6 +14,7 @@ import Image from "next/image";
 interface ExpensesListProps {
   expensesListInfo: ExpensesListItem[];
   onDeleteExpense: (expenseId: number) => void;
+  
 }
 
 const ExpenseListTable = ({

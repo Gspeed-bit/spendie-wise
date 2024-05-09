@@ -24,6 +24,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useRouter } from "next/navigation";
+import EditBudget from "./_components/EditBudget";
 interface BudgetItemProps {
   budget: BudgetListItem; // Make sure BudgetItem component expects BudgetListItem as the type of the budget prop
 }
@@ -155,40 +156,43 @@ const ExpenseDashboard = ({
         <div>
           {budgetInfo ? (
             <p className="border rounded-xl bg-white shadow-md p-4 pb-8 px-3">
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <div className="flex items-center justify-end">
-                    <Button
-                      variant="destructive"
-                      className="flex items-end justify-end p-3 rounded-full cursor-pointer"
-                    >
-                      <Image
-                        src={"/icons/trash-white.svg"}
-                        alt={"logo"}
-                        width={16}
-                        height={10}
-                      />
-                    </Button>
-                  </div>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>
-                      Are you absolutely sure?
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete
-                      this budget and remove the data from our servers.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleDeleteBudget}>
-                      Continue
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+              <div className="flex items-end justify-end gap-3 ">
+                <EditBudget budgetInfo={budgetInfo} />
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <div className="flex items-center justify-end">
+                      <Button
+                        variant="destructive"
+                        className=" p-3 rounded-full cursor-pointer"
+                      >
+                        <Image
+                          src={"/icons/trash-white.svg"}
+                          alt={"logo"}
+                          width={16}
+                          height={10}
+                        />
+                      </Button>
+                    </div>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        Are you absolutely sure?
+                      </AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This action cannot be undone. This will permanently
+                        delete this budget and remove the data from our servers.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction onClick={handleDeleteBudget}>
+                        Continue
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
 
               <BudgetItem budget={budgetInfo} />
             </p>

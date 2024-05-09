@@ -157,7 +157,10 @@ const ExpenseDashboard = ({
           {budgetInfo ? (
             <p className="border rounded-xl bg-white shadow-md p-4 pb-8 px-3">
               <div className="flex items-end justify-end gap-3 ">
-                <EditBudget budgetInfo={budgetInfo} />
+                <EditBudget
+                  refreshData={() => getBudgetInfo()}
+                  budgetInfo={budgetInfo}
+                />
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <div className="flex items-center justify-end">

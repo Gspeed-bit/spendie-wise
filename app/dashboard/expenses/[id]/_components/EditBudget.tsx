@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Pencil } from "lucide-react";
 import EmojiPicker from "emoji-picker-react";
 import { ColorRing } from "react-loader-spinner";
-
+import { toast } from "sonner";
 import {
   Dialog,
   DialogClose,
@@ -19,12 +19,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import { Budgets } from "@/db/schema";
+import { eq } from "drizzle-orm";
+import { db } from "@/utils/dbConfig";
+import { formattedEventDate } from "@/constant";
 
-  interface ExpensesListProps {
-    budgetInfo: BudgetListItem;
-  }
-const EditBudget = ({ budgetInfo }: ExpensesListProps) => {
-  const [pickEmoji, setPickEmoji] = useState("🤓");
+interface ExpensesListProps {
+  budgetInfo: BudgetListItem;
+}
+const EditBudget = ({ budgetInfo, refreshData }:ExpensesListProps & {refreshData: () => void, }) => {
+  const [pickEmoji, setPickEmoji] = useState(budgetInfo.pickEmoji);
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
@@ -32,14 +36,40 @@ const EditBudget = ({ budgetInfo }: ExpensesListProps) => {
   const [eventCreated, setEventCreated] = useState(false);
   const { user } = useUser();
 
+  useEffect(() => {
+    if (eventCreated) {
+      toast("New Budget has been created", {
+        description: formattedEventDate,
+      });
+      refreshData(); // used to refresh the database after creating the budget
+    }
+  }, [eventCreated]);
+  const UpdateBudget = async () => {
+    setIsLoading(true);
+    try {
+      const result = await db
+        .update(Budgets)
+        .set({
+          name: name,
+          amount: amount.toString(),
+          pickEmoji: pickEmoji,
+        })
+        .where(eq(Budgets.id, budgetInfo.id))
+        .returning();
 
+      setIsLoading(false);
+      setEventCreated(!!result);
+      setTimeout(() => {
+        setEventCreated(false);
+      }, 2000);
 
-
-
-const UpdateBudget = () => {
-
-};
-
+      toast("Budget Updated !!!", {
+        description: formattedEventDate,
+      });
+    } catch (error) {
+      console.error("Error updating budget:", error);
+    }
+  };
 
   return (
     <div>
@@ -100,8 +130,7 @@ const UpdateBudget = () => {
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
               <Button
-                // onClick={() => UpdateBudget({ name, amount, pickEmoji })}
-                disabled={!name || !amount || isLoading}
+                onClick={UpdateBudget}
                 className="text-white w-full hover:bg-primary-400"
               >
                 {isLoading ? (
@@ -110,7 +139,6 @@ const UpdateBudget = () => {
                     height="40"
                     width="40"
                     ariaLabel="color-ring-loading"
-                    wrapperStyle={{}}
                     wrapperClass="color-ring-wrapper"
                     colors={[
                       "#e15b64",

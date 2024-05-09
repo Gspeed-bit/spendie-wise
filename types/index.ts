@@ -41,6 +41,8 @@ type ExpensesListItem = {
   name: string;
   amount: string | number;
   createdAt: string;
+  budgetId: number | null;
+
 };
 
 type ExpensesItemProps = {

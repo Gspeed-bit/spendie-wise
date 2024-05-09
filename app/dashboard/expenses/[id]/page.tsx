@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import { and } from "drizzle-orm";
+import { and, desc } from "drizzle-orm";
 import { eq, getTableColumns, sql } from "drizzle-orm";
 import { db } from "@/utils/dbConfig";
 import { Budgets, Expenses } from "@/db/schema";
 import { useUser } from "@clerk/nextjs";
 import BudgetItem from "../../budgets/_components/BudgetItem";
 import AddExpenses from "./_components/AddExpenses";
+import ExpenseListTable from "./_components/ExpenseListTable";
 
 interface BudgetItemProps {
   budget: BudgetListItem; // Make sure BudgetItem component expects BudgetListItem as the type of the budget prop
@@ -14,14 +15,17 @@ interface BudgetItemProps {
 
 const ExpenseDashboard = ({ params }: { params: any }) => {
   const [budgetInfo, setBudgetInfo] = useState<BudgetListItem | null>(null); // Initialize with null or single BudgetListItem
-
+  const [expensesListInfo, setExpensesListInfo] = useState<ExpensesListItem[]>(
+    []
+  );
   const { user } = useUser();
   useEffect(() => {
     if (user) {
       getBudgetInfo();
     }
-  }, [user,params]);
+  }, [user, params]);
 
+  // use to get Budget info
   const getBudgetInfo = async () => {
     try {
       const result = await db
@@ -42,14 +46,28 @@ const ExpenseDashboard = ({ params }: { params: any }) => {
           )
         )
         .groupBy(Budgets.id);
-      console.log(result);
       setBudgetInfo(result[0]);
-   // used to refresh the database after creating the budget
+      getExpensesListInfo();
+
+      // used to refresh the database after creating the budget
     } catch (error) {
       console.error("Error fetching budget info:", error);
     }
   };
 
+  const getExpensesListInfo = async () => {
+    try {
+      const result = await db
+        .select()
+        .from(Expenses)
+        .where(eq(Expenses.budgetId, params.id))
+        .orderBy(desc(Expenses.id));
+      setExpensesListInfo(result);
+      console.log(result);
+    } catch (error) {
+      console.error("Error fetching expenses list:", error);
+    }
+  };
   return (
     <div className="p-5 ">
       <p className=" h3-bold ">Expenses</p>
@@ -85,9 +103,17 @@ const ExpenseDashboard = ({ params }: { params: any }) => {
           )}
         </div>
         <div className="">
-          <AddExpenses budgetId={params.id} 
-          refreshData={() => getBudgetInfo()} />
+          <AddExpenses
+            budgetId={params.id}
+            refreshData={() => getBudgetInfo()}
+          />
         </div>
+      </div>
+      <div>
+        <ExpenseListTable
+          expensesListInfo={expensesListInfo}
+          totalSpend={budgetInfo?budgetInfo.totalSpend:0}
+        />
       </div>
     </div>
   );

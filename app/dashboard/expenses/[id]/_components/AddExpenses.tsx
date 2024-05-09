@@ -9,7 +9,7 @@ import { ColorRing } from "react-loader-spinner";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
 import { formattedEventDate } from "@/constant";
-
+import moment from "moment";
 
 const AddExpenses = ({
   refreshData,
@@ -32,7 +32,7 @@ const AddExpenses = ({
           name: name,
           amount: amount,
           budgetId: budgetId,
-          createdAt: user?.primaryEmailAddress?.emailAddress || "",
+          createdAt: moment().format("MMMM Do YYYY, h:mm:ss a"),
         })
         .returning({ insertedId: Expenses.id });
 

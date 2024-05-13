@@ -8,7 +8,7 @@ import { db } from "@/utils/dbConfig";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import ChartDashboard from "@/components/ui/shared/ChartDashboard";
-
+import BudgetItem from "./budgets/_components/BudgetItem";
 
 const page = () => {
   const { user, isSignedIn } = useUser();
@@ -84,18 +84,21 @@ const page = () => {
       ) : (
         <>
           <CardInfo budgetList={budgetList} />
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 border mt-10">
-            <div className="md:col-span-3 border">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4  mt-10">
+            <div className=" col-span-3">
               <ChartDashboard budgetList={budgetList} />
-             
-
             </div>
-            other content
+            <div className=" border w-full rounded-xl p-4 m-3 flex shadow-md flex-col justify-center ">
+              {budgetList.map((budget, index) => (
+                <div key={index} className="border bg-white ">
+                  <BudgetItem budget={budget} />
+                </div>
+              ))}
+            </div>
           </div>
         </>
       )}
     </div>
   );
-
 };
 export default page;

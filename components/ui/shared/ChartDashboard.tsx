@@ -7,7 +7,6 @@ import {
   YAxis,
   Tooltip as BarTooltip,
   Legend as BarLegend,
-  CartesianGrid,
   LabelList,
 } from "recharts";
 
@@ -35,9 +34,9 @@ const ChartDashboard: React.FC<BudgetListProps> = ({ budgetList }) => {
   ];
 
   return (
-    <div className="flex flex-col flex-center md:flex-row">
+    <div className="flex w-full rounded-xl flex-col md:flex-row md:flex-wrap md:justify-center border pt-10">
       {/* Pie Chart */}
-     <div className="mb-4">
+      <div className="flex-shrink mb-4 md:mr-4">
         <PieChart width={400} height={200}>
           <Pie
             data={data}
@@ -45,7 +44,8 @@ const ChartDashboard: React.FC<BudgetListProps> = ({ budgetList }) => {
             nameKey="name"
             cx="50%"
             cy="50%"
-            outerRadius={60}
+            innerRadius={40} // Set inner radius
+            outerRadius={60} // Set outer radius
             fill="#8884d8"
             label
           >
@@ -59,30 +59,26 @@ const ChartDashboard: React.FC<BudgetListProps> = ({ budgetList }) => {
           {/* Add Tooltip to display information */}
           <Tooltip />
           {/* Add Legend */}
-   
-          <Legend
-            formatter={(value, entry) =>
-              `${entry.payload?.name}`
-            }
-          />
+          <Legend verticalAlign="bottom" height={36} />
         </PieChart>
-     </div>
+      </div>
 
-      {/* Bar Chart */}
-      <BarChart width={500} height={300} data={data}>
-       
-        <XAxis dataKey="name" />
-        <YAxis />
-        <BarTooltip />
-  
-        <BarLegend />
-        <Bar dataKey="budget" name="Budget" fill={colors[0]}>
-          <LabelList dataKey="budget" position="top" />
-        </Bar>
-        <Bar dataKey="spend" name="Spend" fill={colors[1]}>
-          <LabelList dataKey="spend" position="top" />
-        </Bar>
-      </BarChart>
+      <div className="flex-shrink">
+        {/* Bar Chart */}
+        <BarChart width={500} height={300} data={data}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <BarLegend verticalAlign="bottom" height={36} />
+          <BarTooltip />
+
+          <Bar dataKey="budget" name="Budget" fill={colors[0]}>
+            <LabelList dataKey="budget" position="top" />
+          </Bar>
+          <Bar dataKey="spend" name="Spend" fill={colors[1]}>
+            <LabelList dataKey="spend" position="top" />
+          </Bar>
+        </BarChart>
+      </div>
     </div>
   );
 };

@@ -13,10 +13,10 @@ type budgetTypesProps = {
 };
 
 type BudgetListItem = {
-  totalSpend: number;
-  totalItem: number;
   id: number;
   name: string;
+  totalSpend: number;
+  totalItem: number;
   amount: number;
   pickEmoji: string | null;
   createdBy: string;

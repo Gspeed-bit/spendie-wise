@@ -11,7 +11,7 @@ export const sideBar: sideBarProps[] = [
     url: "/dashboard",
     text: "Dashboard",
   },
-  {
+  { 
     icon: LiaPiggyBankSolid,
     url: "/dashboard/budgets",
     text: "Budgets",

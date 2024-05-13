@@ -52,7 +52,7 @@ const BudgetList = () => {
                 <BudgetItem budget={budget} />
               </div>
             ))
-          : [1, 2, 3, 4, 5, 6, 7, 8].map((items, index) => (
+          : [1, 2].map((items, index) => (
               <div key={index}>
                 <div className="bg-white shadow-md p-4 rounded-md animate-pulse">
                   <div className="flex-between px-3 py-3">

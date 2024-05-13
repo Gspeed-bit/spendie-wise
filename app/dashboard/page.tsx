@@ -11,14 +11,16 @@ import ChartDashboard from "@/components/ui/shared/ChartDashboard";
 import BudgetItem from "./budgets/_components/BudgetItem";
 import ExpensesTable from "@/components/ui/shared/ExpensesTable";
 
-const page = () => {
+const page = ({ params }: { params: any }) => {
   const { user, isSignedIn } = useUser();
   const [loading, setLoading] = useState(true); // Loading state for CardInfo component
-
+ const [expensesListInfo, setExpensesListInfo] = useState<ExpensesListItem[]>(
+   []
+ );
   const [budgetList, setbudgetList] = useState<BudgetListItem[]>([]);
   useEffect(() => {
     user && getBudgetList();
-  }, [user]);
+  }, [user, params]);
 
   // use to get budget list
   const getBudgetList = async () => {
@@ -41,7 +43,11 @@ const page = () => {
       ...budget,
       amount: Number(budget.amount),
     }));
-
+    // Convert amount from string to number
+    const expensesList = result.map((expense) => ({
+      ...expense,
+      amount: parseFloat(expense.amount),
+    }));
     //Updates the budgetList state variable with the fetched data.
     setbudgetList(budgets);
     setLoading(false);
@@ -85,13 +91,15 @@ const page = () => {
       ) : (
         <>
           <CardInfo budgetList={budgetList} />
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4  mt-10">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4 mt-10">
             <div className="col-span-1 md:col-span-2 lg:col-span-3 ">
               <ChartDashboard budgetList={budgetList} />
               <ExpensesTable/>
             </div>
-            <div className="border rounded-xl md:p-2  grid gap-3 col-span-1  md:w-full md:col-span-2 lg:col-span-1">
-              <h1 className="h5-bold text-center pt-5 font-bold">Latest Budgets</h1>
+            <div className="border rounded-xl md:p-2 grid gap-2 col-span-1  md:w-full md:col-span-2 lg:col-span-1">
+              <h1 className="h5-bold text-center pt-3">
+                Latest Budgets
+              </h1>
               {budgetList.map((budget, index) => (
                 <div
                   key={index}

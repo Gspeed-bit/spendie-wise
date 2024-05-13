@@ -15,6 +15,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { toast } from "sonner";
+import { formattedEventDate } from "@/constant";
 import Image from "next/image";
 
 const ExpensesTable = () => {
@@ -23,7 +25,9 @@ const ExpensesTable = () => {
     ExpensesListItem[]
   >([]);
   const [eventCreated, setEventCreated] = useState(false);
-
+  const [expensesListInfo, setExpensesListInfo] = useState<ExpensesListItem[]>(
+    []
+  );
   useEffect(() => {
     getAllExpenses();
   }, []); // Fetch expenses when component mounts
@@ -57,47 +61,68 @@ const ExpensesTable = () => {
     }
   };
 
+  const handleDeleteExpense = async (expenseId: number) => {
+    try {
+      // Delete expense from database
+      const response = await db
+        .delete(Expenses)
+        .where(eq(Expenses.id, expenseId))
+        .returning();
+
+      if (response) {
+        toast("Expenses has been deleted", {
+          description: formattedEventDate,
+        });
+        // Refresh budget information
+        getAllExpenses();
+      }
+      // Update expensesList state by filtering out the deleted expense
+      setExpensesListInfo((prevExpensesList) =>
+        prevExpensesList.filter((expense) => expense.id !== expenseId)
+      );
+    } catch (error) {
+      console.error("Error deleting expense:", error);
+    }
+  };
+
   return (
-    <div className="mx-4 p-5">
-      <p className="h3-bold">My Expenses</p>
-      <div className="mt-10 ">
-        <h2 className="text-center h3-bold">A list of your Expenses.</h2>
-        <Table className="mt-5">
-          <TableCaption className="p-medium-14">Expenses List.</TableCaption>
-          <TableHeader>
-            <TableRow className="">
-              <TableHead className="w-[100px]">id</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Amount</TableHead>
-              <TableHead>Expenses</TableHead>
-              <TableHead className="">Date/Time</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {expensesListDisplay.map((expense) => (
-              <TableRow key={expense.id}>
-                <TableCell className="font-medium">{expense.id}</TableCell>
-                <TableCell>
-                  {user ? user.fullName : expense.createdAt}
-                </TableCell>
-                <TableCell>{`\u20AC ${expense.amount}`}</TableCell>
-                <TableCell>{expense.name}</TableCell>
-                <TableCell>{expense.createdAt}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={5} className="p-medium-20">
-                Total
-              </TableCell>
-              <TableCell className="p-medium-14">
-                {/* Render total amount here */}
+    <div className=" p-5 mt-5 border shadow-sm rounded-xl">
+      <h2 className="text-center h5-bold">list of your Expenses.</h2>
+      <Table className="mt-5">
+        <TableCaption className=""></TableCaption>
+        <TableHeader>
+          <TableRow className="">
+            <TableHead>Created By</TableHead>
+            <TableHead>Amount</TableHead>
+            <TableHead>Expenses</TableHead>
+            <TableHead className="">Date/Time</TableHead>
+            <TableHead className="">Action</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {expensesListDisplay.map((expense) => (
+            <TableRow key={expense.id}>
+              <TableCell>{user ? user.fullName : expense.createdAt}</TableCell>
+              <TableCell>{`\u20AC ${expense.amount}`}</TableCell>
+              <TableCell>{expense.name}</TableCell>
+              <TableCell>{expense.createdAt}</TableCell>
+              <TableCell className="">
+                <Image
+                  onClick={() => handleDeleteExpense(expense.id)}
+                  src={"/icons/trash.svg"}
+                  alt={"logo"}
+                  width={20}
+                  height={20}
+                  className="cursor-pointer"
+                />
               </TableCell>
             </TableRow>
-          </TableFooter>
-        </Table>
-      </div>
+          ))}
+        </TableBody>
+        <TableFooter>
+          <TableRow></TableRow>
+        </TableFooter>
+      </Table>
     </div>
   );
 };

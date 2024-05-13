@@ -43,7 +43,7 @@ const ExpenseDashboard = ({ params }: { params: any }) => {
   }, [user, params]);
 
   // use to get Budget info
-  const getBudgetInfo = async () => {
+   const getBudgetInfo = async () => {
     try {
       const result = await db
         .select({

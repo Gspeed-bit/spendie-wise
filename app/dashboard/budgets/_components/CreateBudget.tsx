@@ -51,11 +51,8 @@ const CreateBudget = ({ refreshData }: { refreshData: () => void }) => {
       })
       .returning({ insertedId: Budgets.id });
 
-    setIsLoading(false);
-    setEventCreated(!!result);
-    setTimeout(() => {
-      setEventCreated(false);
-    }, 2000);
+    setAmount(0);
+    setName("");
   };
 
   return (
@@ -99,13 +96,15 @@ const CreateBudget = ({ refreshData }: { refreshData: () => void }) => {
                   <h2 className="p-semibold-14">Budget Name</h2>
                   <Input
                     type="text"
-                    className="placeholder:text-bluey-100 p-regular-12"
+                    value={name}
+                    className="capitalize placeholder:text-bluey-100 p-regular-12"
                     placeholder="e.g. House Rent"
                     onChange={(e) => setName(e.target.value)}
                   />
                   <h2 className="p-semibold-14">Budget Amount</h2>
                   <Input
                     type="number"
+                    value={amount}
                     placeholder={`e.g. \u20AC 1000`}
                     className="placeholder:text-bluey-100 p-regular-12"
                     onChange={(e) => setAmount(parseFloat(e.target.value))}

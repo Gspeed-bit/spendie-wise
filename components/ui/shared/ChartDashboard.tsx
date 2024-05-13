@@ -52,7 +52,7 @@ const ChartDashboard: React.FC<BudgetListProps> = ({ budgetList }) => {
   }, []);
 
   return (
-    <div className="flex-col flex md:flex-row md:flex-wrap md:justify-center pt-10">
+    <div className=" border shadow-sm rounded-xl flex-col flex md:flex-row md:flex-wrap md:justify-center pt-10">
       {/* Pie Chart */}
       <div className="flex-shrink mb-4 md:mr-4">
         <PieChart width={400} height={200}>

@@ -29,13 +29,7 @@ interface BudgetItemProps {
   budget: BudgetListItem; // Make sure BudgetItem component expects BudgetListItem as the type of the budget prop
 }
 
-const ExpenseDashboard = ({
-  params,
- 
-}: {
- 
-  params: any;
-}) => {
+const ExpenseDashboard = ({ params }: { params: any }) => {
   const [budgetInfo, setBudgetInfo] = useState<BudgetListItem | null>(null); // Initialize with null or single BudgetListItem
   const [expensesListInfo, setExpensesListInfo] = useState<ExpensesListItem[]>(
     []
@@ -84,7 +78,7 @@ const ExpenseDashboard = ({
       console.error("Error fetching budget info:", error);
     }
   };
-  
+
   const getExpensesListInfo = async () => {
     try {
       const result = await db

@@ -7,7 +7,8 @@ import { Budgets, Expenses } from "@/db/schema";
 import { db } from "@/utils/dbConfig";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import ChartDashboard from "@/components/ui/shared/ChartDashboard";
+
 
 const page = () => {
   const { user, isSignedIn } = useUser();
@@ -81,7 +82,17 @@ const page = () => {
           ))}
         </div>
       ) : (
-        <CardInfo budgetList={budgetList} />
+        <>
+          <CardInfo budgetList={budgetList} />
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 border mt-10">
+            <div className="md:col-span-3 border">
+              <ChartDashboard budgetList={budgetList} />
+             
+
+            </div>
+            other content
+          </div>
+        </>
       )}
     </div>
   );

@@ -74,7 +74,6 @@ const Page = () => {
               <TableHead>Amount</TableHead>
               <TableHead>Expenses</TableHead>
               <TableHead className="">Date/Time</TableHead>
-              <TableHead className="">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -87,15 +86,6 @@ const Page = () => {
                 <TableCell>{`\u20AC ${expense.amount}`}</TableCell>
                 <TableCell>{expense.name}</TableCell>
                 <TableCell>{expense.createdAt}</TableCell>
-                <TableCell className="">
-                  <Image
-                    src={"/icons/trash.svg"}
-                    alt={"logo"}
-                    width={20}
-                    height={20}
-                    className="cursor-pointer"
-                  />
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>

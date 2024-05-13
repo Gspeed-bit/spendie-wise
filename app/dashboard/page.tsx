@@ -85,7 +85,7 @@ const page = () => {
         <>
           <CardInfo budgetList={budgetList} />
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4  mt-10">
-            <div className="col-span-1 md:col-span-2">
+            <div className="col-span-1 md:col-span-2 ">
               <ChartDashboard budgetList={budgetList} />
             </div>
             <div className="border rounded-xl md:p-2  grid gap-3 col-span-1 ">

@@ -36,7 +36,7 @@ const ChartDashboard: React.FC<BudgetListProps> = ({ budgetList }) => {
   return (
     <div className="flex w-full rounded-xl flex-col md:flex-row md:flex-wrap md:justify-center border pt-10">
       {/* Pie Chart */}
-      <div className=" mb-4 md:mr-4">
+      <div className=" w-full mb-4">
         <PieChart width={400} height={200}>
           <Pie
             data={data}
@@ -63,9 +63,9 @@ const ChartDashboard: React.FC<BudgetListProps> = ({ budgetList }) => {
         </PieChart>
       </div>
 
-      <div className="">
+      <div className="w-full">
         {/* Bar Chart */}
-        <BarChart width={400} height={300} data={data}>
+        <BarChart width={300} height={300} data={data}>
           <XAxis dataKey="name" />
           <YAxis />
           <BarLegend verticalAlign="bottom" height={36} />

@@ -53,6 +53,7 @@ const CreateBudget = ({ refreshData }: { refreshData: () => void }) => {
 
     setAmount(0);
     setName("");
+     setEventCreated(true);
   };
 
   return (

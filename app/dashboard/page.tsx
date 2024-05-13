@@ -103,7 +103,7 @@ const page = ({ params }: { params: any }) => {
               {budgetList.map((budget, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-xl m-3 p-4 border shadow-md"
+                  className="bg-white rounded-xl h-48 p-4 border shadow-md"
                 >
                   <BudgetItem budget={budget} />
                 </div>

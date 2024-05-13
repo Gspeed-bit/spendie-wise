@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
 import {
   BarChart,
@@ -33,10 +33,28 @@ const ChartDashboard: React.FC<BudgetListProps> = ({ budgetList }) => {
     "#7148FC",
   ];
 
+  // State to store the width of the chart
+  const [chartWidth, setChartWidth] = useState<number>(300);
+
+  // Function to update the width of the chart based on the window size
+  const updateChartWidth = () => {
+    const newWidth = window.innerWidth > 768 ? 500 : 300; // Set width based on screen size
+    setChartWidth(newWidth);
+  };
+
+  // Update the chart width when the component mounts and when the window is resized
+  useEffect(() => {
+    updateChartWidth();
+    window.addEventListener("resize", updateChartWidth);
+    return () => {
+      window.removeEventListener("resize", updateChartWidth);
+    };
+  }, []);
+
   return (
-    <div className="flex w-full rounded-xl flex-col md:flex-row md:flex-wrap md:justify-center border pt-10">
+    <div className="flex-col flex md:flex-row md:flex-wrap md:justify-center pt-10">
       {/* Pie Chart */}
-      <div className=" w-full mb-4">
+      <div className="flex-shrink mb-4 md:mr-4">
         <PieChart width={400} height={200}>
           <Pie
             data={data}
@@ -63,9 +81,9 @@ const ChartDashboard: React.FC<BudgetListProps> = ({ budgetList }) => {
         </PieChart>
       </div>
 
-      <div className="w-full">
-        {/* Bar Chart */}
-        <BarChart width={300} height={300} data={data}>
+      {/* Bar Chart */}
+      <div className="flex-shrink">
+        <BarChart width={chartWidth} height={300} data={data}>
           <XAxis dataKey="name" />
           <YAxis />
           <BarLegend verticalAlign="bottom" height={36} />

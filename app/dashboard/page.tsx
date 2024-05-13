@@ -85,10 +85,10 @@ const page = () => {
         <>
           <CardInfo budgetList={budgetList} />
           <div className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4  mt-10">
-            <div className="col-span-1 md:col-span-2 ">
+            <div className="col-span-1 md:col-span-2 lg:col-span-3 ">
               <ChartDashboard budgetList={budgetList} />
             </div>
-            <div className="border rounded-xl md:p-2  grid gap-3 col-span-1 ">
+            <div className="border rounded-xl md:p-2  grid gap-3 col-span-1 md:min-w-full md:col-span-2 lg:col-span-1">
               <h1 className="h5-bold text-center pt-5 font-bold">Latest Budgets</h1>
               {budgetList.map((budget, index) => (
                 <div

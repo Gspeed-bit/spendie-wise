@@ -39,7 +39,7 @@ const Sidebar = () => {
                   <span
                     className={`flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-primary-400 hover:text-white ${
                       path == sidebar.url &&
-                      "bg-primary-400 text-white"
+                      "bg-primary-400 hover:text-white"
                     }`}
                   >
                     <sidebar.icon className="h-5 w-5" />

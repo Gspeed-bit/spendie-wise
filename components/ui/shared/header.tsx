@@ -7,8 +7,8 @@ import Link from "next/link";
 const Header = () => {
   const { user, isSignedIn } = useUser();
   return (
-    <div className=" w-full shadow-md sticky top-0 z-99">
-      <div className=" mx-9 md:mx-20 flex-between p-3 ">
+    <div className=" w-full shadow-md bg-white sticky top-0 z-99">
+      <div className=" bg-white mx-9 md:mx-20 flex-between p-3 ">
         <Link href={"/"}>
           <Image src="/logo.png" width={60} height={50} alt="Logo" />
         </Link>

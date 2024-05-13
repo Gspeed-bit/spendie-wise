@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+🚀 Exciting News! 🚀
 
-## Getting Started
+I'm thrilled to share my latest project, Spendie Wise, a full-stack expense tracker app that I've been building and deploying! 💼💰
 
-First, run the development server:
+✨ What is Spendie Wise?
+Spendie Wise is a comprehensive expense tracking application designed to help users manage their finances effectively. With Spendie Wise, users can easily track their expenses, set budgets, and gain insights into their spending habits.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🔧 Tech Stack:
+For the frontend, I utilized Next.js, a powerful React framework that allows for fast and efficient development. The sleek and responsive UI was crafted using Tailwind CSS, providing a seamless user experience across devices. On the backend, I integrated Dirzzle ORM to manage our database, ensuring efficient data handling and storage.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🔑 Authentication:
+To provide secure authentication for users, I integrated Clerk, a robust authentication platform. Clerk offers seamless user authentication and management, allowing users to sign in securely and access their personalized financial data.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🌐 Check out Spendie Wise:
+Explore Spendie Wise now: https://spendie-wise.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+🔗 Resources:
+- Clerk: [Clerk](https://clerk.com/) - Secure authentication made easy.
+- Dirzzle ORM: [Dirzzle ORM](https://orm.drizzle.team/) - Simplify database management for your Next.js applications.
+- Eraser.io: [Eraser.io](https://www.eraser.io/) - [Brief description of Eraser.io]
 
-## Learn More
+📹 Stay tuned for a video walkthrough of Spendie Wise, coming soon!
 
-To learn more about Next.js, take a look at the following resources:
+I'm incredibly proud of what I've accomplished with Spendie Wise, and I can't wait for you to explore the app. Feel free to reach out with any questions or feedback – I'd love to hear from you! 🚀💼
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#FullStackDevelopment #NextJS #TailwindCSS #DirzzleORM #Clerk #ExpenseTracker #FinanceManagement #PersonalFinance #SpendieWise #DeveloperPortfolio
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

@@ -95,14 +95,12 @@ const Page = () => {
 
   return (
     <div className="mx-4 p-5">
-      <p className="h3-bold">My Expenses</p>
       <div className="mt-10 ">
-        <h2 className="text-center h3-bold">A list of your Expenses.</h2>
+        <h2 className="text-center h3-bold">A list of your Expenses</h2>
         <Table className="mt-5">
-          <TableCaption className="p-medium-14">Expenses List.</TableCaption>
+          <TableCaption className="p-medium-14">Expenses List</TableCaption>
           <TableHeader>
             <TableRow className="">
-              <TableHead className="w-[100px]">id</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Expenses</TableHead>
@@ -113,7 +111,6 @@ const Page = () => {
           <TableBody>
             {expensesListDisplay.map((expense) => (
               <TableRow key={expense.id}>
-                <TableCell className="font-medium">{expense.id}</TableCell>
                 <TableCell>
                   {user ? user.fullName : expense.createdAt}
                 </TableCell>

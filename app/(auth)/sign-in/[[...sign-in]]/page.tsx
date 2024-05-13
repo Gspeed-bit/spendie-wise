@@ -18,7 +18,7 @@ export default function Page() {
         <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
           <div className="max-w-xl lg:max-w-3xl space-y-6 text-center ">
             <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-              Welcome to Speed Wise
+              Welcome to Speedie Wise
             </h1>
             <p className="mt-4 leading-relaxed text-grey-500">
               Your Trusted Guide to Financial Wellness.

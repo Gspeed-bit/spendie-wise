@@ -11,7 +11,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "SpendWise",
+  title: "SpendieWise",
   description:
     "An expense tracker app to help you manage your finances wisely.",
 };

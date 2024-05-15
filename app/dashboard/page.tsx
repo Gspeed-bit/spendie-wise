@@ -110,7 +110,8 @@ const page = ({ params }: { params: any }) => {
               ))}
             </div>
           </div>
-        </>
+          
+                </>
       )}
     </div>
   );
